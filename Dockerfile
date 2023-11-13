@@ -1,9 +1,9 @@
 # Angular Build Stage
 FROM node:18.18.2-alpine
 
-WORKDIR /app
+WORKDIR /
 
-COPY . .
+COPY . /app
 RUN npm install -g @angular/cli
 RUN cd /app && npm install 
 RUN cd /app && ng build --configuration=production
