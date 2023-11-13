@@ -1,14 +1,25 @@
-# Angular Build Stage
-FROM node:18.18.2-alpine
+# Etapa 1: Construir la aplicación Angular
+FROM node:18.18.2 as builder
 
-WORKDIR /
+WORKDIR /app
 
-COPY . /app
-RUN npm install -g @angular/cli
-RUN cd /app && npm install
-RUN cd /app && ng build --configuration=production
+COPY package*.json ./
 
-# Effective Stage
-FROM nginx:1.25.3-alpine-slim
+RUN npm install
 
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY . .
+
+RUN npm run build
+
+# Etapa 2: Crear la imagen final con el servidor nginx
+FROM nginx:latest
+
+# Copiar los archivos de la etapa de construcción
+COPY --from=builder /app/dist/* /usr/share/nginx/html/
+
+# Copiar la configuración personalizada de nginx
+COPY nginx-custom.conf /etc/nginx/conf.d/default.conf
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
