@@ -12,9 +12,9 @@ build:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
     - echo "Building Docker image..."
-    - docker build --pull Dockerfile --target app -t "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA" .
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
     - echo "Pushing Docker image..."
-    - docker push "$CI_REGISTRY_IMAGE:$CI_COMMIT_SHA"
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
   # Run this job only if a Dockerfile exists
   rules:
