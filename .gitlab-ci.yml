@@ -9,7 +9,7 @@ build:
     - docker:dind
   before_script:
     - echo "Logging in to Docker registry..."
-    - docker login -u martinignacioriosc@gmail.com -p Martin212.365 $CI_REGISTRY
+    - docker login -u martinignacioriosc@gmail.com -p martin212.365 $CI_REGISTRY
   script:
     - echo "Building Docker image..."
     - echo $CI_REGISTRY_IMAGE
