@@ -1,11 +1,9 @@
 # Angular Build Stage
-FROM alpine:3.17
+FROM node:18.18.2-alpine
 
-ENV NODE_VERSION 18.18.2
+WORKDIR /app
 
-WORKDIR /
-
-COPY . /app
+COPY . .
 RUN npm install -g @angular/cli
 RUN cd /app && npm install 
 RUN cd /app && ng build --configuration=production
