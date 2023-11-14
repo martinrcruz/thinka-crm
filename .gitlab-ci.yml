@@ -1,4 +1,4 @@
-image: docker:dnid
+image: docker:latest
 
 stages:
 - build
