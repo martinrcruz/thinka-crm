@@ -1,4 +1,4 @@
-FROM node:18.18.2 as builder
+FROM node:18.18.2 as build
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
 RUN npm install
