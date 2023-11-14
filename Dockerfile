@@ -1,4 +1,3 @@
-# Etapa 1: Construir la aplicación Angular
 FROM node:18.18.2 as builder
 WORKDIR /usr/src/app
 COPY package.json package-lock.json ./
