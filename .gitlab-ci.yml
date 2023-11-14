@@ -1,4 +1,4 @@
-image: docker:stable
+image: docker:dnid
 
 stages:
 - build
@@ -12,6 +12,11 @@ before_script:
 
 variables:
   DOCKER_IMAGE_NAME: pos-assistant
+  DOCKER_TLS_CERTDIR: ""
+  DOCKER_HOST: "tcp://docker:2375"
+
+services:
+  - docker:dind
 
 build:
   stage: build
