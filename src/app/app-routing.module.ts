@@ -21,9 +21,9 @@ const routes: Routes = [
     },
     children: [
       {
-        path: 'dashboard',
+        path: 'agenda',
         loadChildren: () =>
-          import('./views/dashboard/dashboard.module').then((m) => m.DashboardModule)
+          import('./views/agenda/agenda.module').then((m) => m.AgendaModule)
       },
       {
         path: 'theme',
