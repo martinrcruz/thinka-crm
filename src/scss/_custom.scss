@@ -1,2 +1,88 @@
 // Here you can add other styles
+.thinka-table {
+  background-color: white !important;
+  th {
+    background-color: rgb(41, 31, 133) !important;
+    color: white !important;
+    border: 1px solid white;
+  }
+  td {
+    border: 1px solid rgb(233, 233, 233);
+  }
+}
 
+.thinka-box {
+  background-color: rgb(255, 255, 255);
+  margin: 15px;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid gray;
+}
+
+.thinka-form-section {
+  background-color: white !important;
+  mat-hint {
+    background-color: none !important;
+  }
+}
+
+.thinka-btn-add {
+  background-color: rgb(8, 146, 105);
+  padding: 10px 25px 10px 25px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  &:hover{
+    background-color: rgb(9, 104, 75);
+    color: rgb(233, 233, 233);
+    transition: 0.3s;
+  }
+}
+.thinka-btn-do {
+  background-color: rgb(8, 84, 146);
+  padding: 10px 25px 10px 25px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  &:hover{
+    background-color: rgb(7, 64, 110);
+    color: rgb(233, 233, 233);
+    transition: 0.3s;
+  }
+}
+.thinka-btn-edit {
+  background-color: rgb(196, 192, 7);
+  padding: 10px 25px 10px 25px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  &:hover{
+    background-color: rgb(167, 164, 7);
+    color: rgb(233, 233, 233);
+    transition: 0.3s;
+  }
+}
+.thinka-btn-view {
+  background-color: rgb(81, 18, 197);
+  padding: 10px 25px 10px 25px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  &:hover{
+    background-color: rgb(69, 16, 167);
+    color: rgb(233, 233, 233);
+    transition: 0.3s;
+  }
+}
+.thinka-btn-delete {
+  background-color: rgb(179, 11, 11);
+  padding: 10px 25px 10px 25px;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  &:hover{
+    background-color: rgb(141, 10, 10);
+    color: rgb(233, 233, 233);
+    transition: 0.3s;
+  }
+}

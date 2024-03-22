@@ -1,0 +1,140 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Listado de Clientes</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row thinka-box">
+    <div class="col-2">
+      <button class="thinka-btn-add"> Agregar Cliente </button>
+    </div>
+    <div class="col-1 offset-8">
+      <button class="thinka-btn-view"> Importar </button>
+    </div>
+    <div class="col-1">
+      <button class="thinka-btn-edit"> Exportar </button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row thinka-box">
+    <div class="col">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha de Registro</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Fecha de Inicio">
+          <input matEndDate placeholder="Fecha de Termino">
+        </mat-date-range-input>
+        <mat-hint>DD/MM/YYYY – DD/MM/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline">
+        <mat-label>Estado de Cliente</mat-label>
+        <mat-select>
+          <mat-option value="1">Activo</mat-option>
+          <mat-option value="2">Inactivo</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline">
+        <mat-label>Estado de Proyecto</mat-label>
+        <mat-select>
+          <mat-option value="1">Completado</mat-option>
+          <mat-option value="2">Pendiente</mat-option>
+          <mat-option value="3">Atrasado</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline">
+        <mat-label>Busqueda</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+    </div>
+    <div class="col-2">
+      <button class="thinka-btn-do"> Aplicar Filtro</button>
+    </div>
+  </div>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="thinka-table">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.firstName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+      <td mat-cell *matCellDef="let row"> {{row.lastName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+      <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="city">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> City </th>
+      <td mat-cell *matCellDef="let row"> {{row.city}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="contactPlatform">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Platform </th>
+      <td mat-cell *matCellDef="let row"> {{row.contactPlatform}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="workLine">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Work Line </th>
+      <td mat-cell *matCellDef="let row"> {{row.workLine}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inCharge">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> In Charge </th>
+      <td mat-cell *matCellDef="let row"> {{row.inCharge}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Created At </th>
+      <td mat-cell *matCellDef="let row"> {{row.createdAt}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let row"> {{row.status}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Edit </th>
+      <td mat-cell *matCellDef="let row"> <button class="thinka-btn-edit"> Editar </button> </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Delete </th>
+      <td mat-cell *matCellDef="let row"> <button class="thinka-btn-delete"> Eliminar </button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No hay resultados. "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
