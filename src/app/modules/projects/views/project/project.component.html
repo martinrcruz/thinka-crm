@@ -1,0 +1,88 @@
+<div class="spinner-border" *ngIf="loading">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Listado de Proyectos</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row thinka-box">
+    <div class="col-2">
+      <button class="thinka-btn-add" (click)="openDialog(null)"> Agregar Proyecto </button>
+    </div>
+    <div class="col-1 offset-8">
+      <button class="thinka-btn-view"> Importar </button>
+    </div>
+    <div class="col-1">
+      <button class="thinka-btn-edit"> Exportar </button>
+    </div>
+  </div>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort class="thinka-table">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
+      <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="shortDesc">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion corta </th>
+      <td mat-cell *matCellDef="let row"> {{row.shortDesc}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryStatus">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado de Entrega </th>
+      <td mat-cell *matCellDef="let row"> {{row.deliveryStatus}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="inCharge">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> A cargo</th>
+      <td mat-cell *matCellDef="let row"> {{row.inCharge}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expectedDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha esperada </th>
+      <td mat-cell *matCellDef="let row"> {{row.expectedDate}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar </th>
+      <td mat-cell *matCellDef="let row">
+        <button class="thinka-btn-edit" (click)="openDialog(row.id)"> 
+          <img src="../../../assets/icons/crud/edit.svg">
+          
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Eliminar </th>
+      <td mat-cell *matCellDef="let row">
+        <button class="thinka-btn-delete" (click)="delete(row.id)">
+          <img src="../../../assets/icons/crud/delete.svg">
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No hay resultados.</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

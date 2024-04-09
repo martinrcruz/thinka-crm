@@ -5,37 +5,42 @@ export const navItems: INavData[] = [
     title: true,
     name: 'Clientes y Leads'
   },
-  {
-    name: 'Contactos',
-    url: '/contact/leads',
-    iconComponent: { name: 'cil-speedometer' },
-  },
+  // {
+  //   name: 'Contactos',
+  //   url: '/contacts/leads',
+  //   iconComponent: { name: 'cil-user-follow' },
+  // },
   {
     name: 'Clientes',
     url: '/contact/customer',
-    iconComponent: { name: 'cil-speedometer' },
+    iconComponent: { name: 'cil-group' },
   },
   {
     title: true,
     name: 'Cotizacion y Ventas'
   },
   {
-    name: 'Cotizacion',
-    url: '/sales/cotizacion',
-    iconComponent: { name: 'cil-speedometer' },
+    name: 'Cotizaciones',
+    url: '/sales/quote',
+    iconComponent: { name: 'cil-calculator' },
   },
   {
-    name: 'Venta',
-    url: '/sales/venta',
-    iconComponent: { name: 'cil-speedometer' },
+    name: 'Ventas',
+    url: '/sales/sale',
+    iconComponent: { name: 'cil-cart' },
   },
   {
     title: true,
-    name: 'Proyectos y Tareas'
+    name: 'Projects & Tasks'
+  },
+  {
+    name: 'Proyectos',
+    url: '/projects/project',
+    iconComponent: { name: 'cil-briefcase' },
   },
   {
     name: 'Tareas',
-    url: '/projects/tareas',
-    iconComponent: { name: 'cil-speedometer' },
+    url: '/projects/tasks',
+    iconComponent: { name: 'cil-bolt' },
   }
 ];

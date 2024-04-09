@@ -19,17 +19,17 @@ const routes: Routes = [
       {
         path: 'contact',
         loadChildren: () =>
-          import('./views/contact/contact.module').then((m) => m.ContactModule)
+          import('./modules/contacts/contacts.module').then((m) => m.ContactsModule)
       },
       {
         path: 'sales',
         loadChildren: () =>
-          import('./views/sales/sales.module').then((m) => m.SalesModule)
+          import('./modules/sales/sales.module').then((m) => m.SalesModule)
       },
       {
         path: 'projects',
         loadChildren: () =>
-          import('./views/projects/projects.module').then((m) => m.ProjectsModule)
+          import('./modules/projects/projects.module').then((m) => m.ProjectsModule)
       },
     ]
   },

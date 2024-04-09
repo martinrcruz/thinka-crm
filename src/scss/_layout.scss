@@ -5,3 +5,7 @@
   will-change: auto;
   @include transition(padding .15s);
 }
+
+c-sidebar {
+  background-color: rgba(32, 57, 121, 0.896) !important;
+}

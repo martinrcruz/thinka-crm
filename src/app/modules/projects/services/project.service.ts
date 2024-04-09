@@ -1,0 +1,87 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, map, catchError } from 'rxjs';
+import { DefaultResponse } from 'src/app/shared/models/Http';
+import { ErrorService } from 'src/app/shared/services/error/error.service';
+import { ProjectData, Project } from '../models/Project';
+
+export enum ProjectRoutes {
+  LIST = '/v1/project/list',
+  GET = '/v1/project/get',
+  SAVE = '/v1/project/add',
+  UPDATE = '/v1/project/edit',
+  DELETE = '/v1/project/delete'
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+
+export class ProjectService {
+
+  private apiUrl: string = "http://localhost:8083/api";
+
+  constructor(private _http: HttpClient) {
+  }
+
+  listProjects(): Observable<any> {
+    return this._http.get<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.LIST}`).pipe(
+      map((response: DefaultResponse) => {
+        console.log(response)
+        if (response.resCode === 0) {
+          return response.dto;
+        }
+        throw new Error(`${response.resCode}`);
+      }),
+      catchError(ErrorService.handleServiceError),
+    );
+  }
+
+  getProjectById(id: number): Observable<ProjectData> {
+    return this._http.get<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.GET}/${id}`).pipe(
+      map((response: DefaultResponse) => {
+        if (response.resCode === 0) {
+          return response.dto;
+        }
+        throw new Error(`${response.resCode}`);
+      }),
+      catchError(ErrorService.handleServiceError),
+    );
+  }
+
+  createProject(project: Project) {
+    return this._http.post<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.SAVE}`, project).pipe(
+      map((response: DefaultResponse) => {
+        if (response.resCode === 0) {
+          return response.dto;
+        }
+        throw new Error(`${response.resCode}`);
+      }),
+      catchError(ErrorService.handleServiceError),
+    );
+  }
+
+  updateProject(project: Project) {
+    return this._http.put<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.UPDATE}`, project).pipe(
+      map((response: DefaultResponse) => {
+        if (response.resCode === 0) {
+          return response.dto;
+        }
+        throw new Error(`${response.resCode}`);
+      }),
+      catchError(ErrorService.handleServiceError),
+    );
+  }
+
+  deleteProject(id: number) {
+    return this._http.delete<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.DELETE}?id=${id}`).pipe(
+      map((response: DefaultResponse) => {
+        if (response.resCode === 0) {
+          return response.dto;
+        }
+        throw new Error(`${response.resCode}`);
+      }),
+      catchError(ErrorService.handleServiceError),
+    );
+  }
+}
