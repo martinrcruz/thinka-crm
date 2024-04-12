@@ -1,1 +1,117 @@
-<p>task-modal works!</p>
+<div class="container-fluid">
+  <div class="row modal-header">
+    <h2 mat-dialog-title>{{this.action}} Proyecto </h2>
+  </div>
+  <div class="row modal-body">
+    <mat-dialog-content>
+      <form [formGroup]="taskForm">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="title">Titulo:</label>
+                <input type="text" formControlName="title" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="resume">Resumen:</label>
+                <textarea formControlName="resume" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="description">Descripcion:</label>
+                <textarea formControlName="description" class="form-control" rows="5"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="objectives">Objetivos:</label>
+                <textarea formControlName="objectives" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-7">
+              <div class="form-group">
+                <label for="inCharge">A cargo:</label>
+                <input type="text" formControlName="inCharge" class="form-control">
+              </div>
+            </div>
+
+            <div class="col-5">
+              <div class="form-group">
+                <label for="priority">Prioridad:</label>
+                <mat-select formControlName="priority" class="form-control">
+                  <mat-option>
+                    1
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <label for="tags">Tags:</label>
+              <input type="text" formControlName="tags" class="form-control">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <label for="startDate">Fecha de Creación:</label>
+                <input type="date" formControlName="startDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="endDate">Fecha de Entrega:</label>
+                <input type="date" formControlName="endDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="taskStatus">Estado de Entrega:</label>
+                <mat-select formControlName="taskStatus" class="form-control">
+                  <mat-option *ngFor="let status of statusList" [value]="status">
+                    {{ status }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="comments">Comentarios:</label>
+                <textarea formControlName="comments" class="form-control" rows="8"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </mat-dialog-content>
+  </div>
+  <div class="row modal-footer">
+    <mat-dialog-actions class="d-flex justify-content-center">
+      <button class="thinka-btn-delete m-2" mat-dialog-close>Cancelar</button>
+      <button class="thinka-btn-do m-2" (click)="createOrUpdate()" mat-dialog-close cdkFocusInitial>Guardar</button>
+    </mat-dialog-actions>
+  </div>
+</div>

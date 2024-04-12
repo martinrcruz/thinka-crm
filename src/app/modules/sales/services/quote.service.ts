@@ -4,6 +4,7 @@ import { Observable, map, catchError } from 'rxjs';
 import { DefaultResponse } from 'src/app/shared/models/Http';
 import { ErrorService } from 'src/app/shared/services/error/error.service';
 import { QuoteData, Quote } from '../models/Quote';
+import { environment } from 'src/environments/environment';
 
 export enum QuoteRoutes {
   LIST = '/v1/quote/list',
@@ -19,7 +20,7 @@ export enum QuoteRoutes {
 
 export class QuoteService {
 
-  private apiUrl: string = "http://localhost:8082/api";
+  private apiUrl: string = environment.saleMicroserviceUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -37,7 +38,7 @@ export class QuoteService {
     );
   }
 
-  getQuoteById(id: number): Observable<QuoteData> {
+  getQuoteById(id: number): Observable<Quote> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -49,7 +50,7 @@ export class QuoteService {
     );
   }
 
-  createQuote(Quote: Quote) {
+  createQuote(Quote: QuoteData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.SAVE}`, Quote).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -61,7 +62,7 @@ export class QuoteService {
     );
   }
 
-  updateQuote(Quote: Quote) {
+  updateQuote(Quote: QuoteData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.UPDATE}`, Quote).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {

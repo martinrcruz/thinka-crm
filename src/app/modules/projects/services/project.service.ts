@@ -37,7 +37,7 @@ export class ProjectService {
     );
   }
 
-  getProjectById(id: number): Observable<ProjectData> {
+  getProjectById(id: number): Observable<Project> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -49,7 +49,7 @@ export class ProjectService {
     );
   }
 
-  createProject(project: Project) {
+  createProject(project: ProjectData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.SAVE}`, project).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -61,7 +61,7 @@ export class ProjectService {
     );
   }
 
-  updateProject(project: Project) {
+  updateProject(project: ProjectData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.UPDATE}`, project).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {

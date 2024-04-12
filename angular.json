@@ -39,7 +39,8 @@
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/scss/styles.scss",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
@@ -88,10 +89,10 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "pos-assistant:build:production"
+              "buildTarget": "pos-assistant:build:production"
             },
             "development": {
-              "browserTarget": "pos-assistant:build:development"
+              "buildTarget": "pos-assistant:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -99,7 +100,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pos-assistant:build"
+            "buildTarget": "pos-assistant:build"
           }
         },
         "test": {
@@ -118,7 +119,8 @@
             ],
             "styles": [
               "@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/scss/styles.scss"
+              "src/scss/styles.scss",
+              "./node_modules/@syncfusion/ej2-material-theme/styles/material.css"
             ],
             "scripts": []
           }

@@ -16,7 +16,6 @@ import {
   TooltipModule,
   UtilitiesModule
 } from '@coreui/angular';
-import { LeadsComponent } from './views/leads/leads.component';
 import { ContactsRoutingModule } from './contacts-routing.module';
 import { CustomerComponent } from './views/customer/customer.component';
 
@@ -34,7 +33,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomerModalComponent } from './components/customer-modal/customer-modal.component';
 @NgModule({
   declarations: [
-    LeadsComponent,
     CustomerComponent,
     CustomerModalComponent
   ],

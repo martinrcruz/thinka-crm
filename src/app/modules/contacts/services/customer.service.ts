@@ -5,7 +5,7 @@ import { ErrorService } from 'src/app/shared/services/error/error.service';
 import { catchError, map } from 'rxjs/operators';
 import { DefaultResponse } from 'src/app/shared/models/Http';
 import { Customer } from 'src/app/modules/contacts/models/Customer';
-import { CustomerData } from 'src/app/modules/contacts/models/CustomerData';
+import { CustomerData } from 'src/app/modules/contacts/models/Customer';
 import { environment } from '../../../../environments/environment';
 
 export enum CustomerRoutes {
@@ -22,7 +22,7 @@ export enum CustomerRoutes {
 
 export class CustomerService {
 
-  private apiUrl: string = "http://localhost:8081/api";
+  private apiUrl: string = environment.clientMicroserviceUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -40,7 +40,7 @@ export class CustomerService {
     );
   }
 
-  getCustomerById(id: number): Observable<CustomerData> {
+  getCustomerById(id: number): Observable<Customer> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -52,7 +52,7 @@ export class CustomerService {
     );
   }
 
-  createCustomer(customer: Customer) {
+  createCustomer(customer: CustomerData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.SAVE}`, customer).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -64,7 +64,7 @@ export class CustomerService {
     );
   }
 
-  updateCustomer(customer: Customer) {
+  updateCustomer(customer: CustomerData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.UPDATE}`, customer).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {

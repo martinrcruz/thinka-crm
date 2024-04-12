@@ -6,17 +6,33 @@ import { MatTableDataSource } from '@angular/material/table';
 import { catchError, of } from 'rxjs';
 import Swal from 'sweetalert2';
 import { SaleModalComponent } from '../../components/sale-modal/sale-modal.component';
-import { Sale } from 'src/app/modules/sales/models/Sale';
+import { Sale, SaleData } from 'src/app/modules/sales/models/Sale';
 import { SaleService } from 'src/app/modules/sales/services/sale.service';
+import { QuoteData } from '../../models/Quote';
 
 @Component({
   selector: 'app-sale',
   templateUrl: './sale.component.html',
-  styleUrls: ['./sale.component.scss']
+  styleUrls: ['./sale.component.scss'],
 })
 export class SaleComponent {
   dataSource: any;
-  displayedColumns: string[] = ['id', 'firstName', 'lastName', 'email', 'city', 'contactPlatform', 'workLine', 'inCharge', 'createdAt', 'status', 'edit', 'delete'];
+  displayedColumns: string[] = [
+    'id',
+    'title',
+    'resume',
+    'startDate',
+    'endDate',
+    'domain',
+    'cost',
+    'duration',
+    'createdAt',
+    'createdBy',
+    'lastModifiedAt',
+    'lastModifiedBy',
+    'edit',
+    'delete'
+  ];
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
@@ -29,13 +45,9 @@ export class SaleComponent {
   search: string = '';
   loading: boolean = false;
 
-  constructor(
-    private _dialog: MatDialog,
-    private _sale: SaleService
-  ) {
-  }
+  constructor(private _dialog: MatDialog, private _sale: SaleService) {}
 
-  ngOnInit(){
+  ngOnInit() {
     this.listSales();
   }
 
@@ -43,7 +55,11 @@ export class SaleComponent {
     this.loading = true;
     this._sale
       .listSales()
-      .pipe(catchError((error) => of({ dto: [], codError: error, codErrorDesc: error.descError })))
+      .pipe(
+        catchError((error) =>
+          of({ dto: [], codError: error, codErrorDesc: error.descError })
+        )
+      )
       .subscribe((response: Sale[]) => {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
@@ -59,8 +75,8 @@ export class SaleComponent {
       width: '1200px',
       height: '700px',
       data: {
-        id: id
-      }
+        id: id,
+      },
     });
     dialogRef.afterClosed().subscribe(() => {
       this.listSales();
@@ -69,28 +85,29 @@ export class SaleComponent {
 
   delete(id: number) {
     Swal.fire({
-      title: "Estas seguro de que quieres eliminar el registro?",
-      icon: "error",
+      title: 'Estas seguro de que quieres eliminar el registro?',
+      icon: 'error',
       showDenyButton: true,
-      confirmButtonText: "Eliminar",
-      denyButtonText: "Cancelar"
+      confirmButtonText: 'Eliminar',
+      denyButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isDenied) {
-        Swal.fire("La operación ha sido cancelada", "", "info");
+        Swal.fire('La operación ha sido cancelada', '', 'info');
       } else if (result.isConfirmed) {
-        this._sale.deleteSale(id)
+        this._sale
+          .deleteSale(id)
           .pipe(
             catchError((error) => {
               Swal.fire('Error al eliminar registro', error.message, 'error');
               return of(null);
-            }),
+            })
           )
           .subscribe((response: string | null) => {
             if (response) {
-              Swal.fire("Registro eliminado con exito", "", "success");
+              Swal.fire('Registro eliminado con exito', '', 'success');
               this.listSales();
             }
-          })
+          });
       }
     });
   }

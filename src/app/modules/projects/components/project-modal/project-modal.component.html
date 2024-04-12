@@ -1,59 +1,68 @@
-<h2 mat-dialog-title>{{this.action}} Proyecto</h2>
-<mat-dialog-content>
-  <form [formGroup]="projectForm">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="title">Titulo:</label>
-            <input type="text" formControlName="title" class="form-control">
+<div class="container-fluid">
+  <div class="row modal-header">
+    <h2 mat-dialog-title>{{this.action}} Proyecto </h2>
+  </div>
+  <div class="row modal-body">
+    <mat-dialog-content>
+      <form [formGroup]="projectForm">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="title">Titulo:</label>
+                <input type="text" formControlName="title" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="resume">Resumen:</label>
+                <textarea formControlName="resume" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="description">Descripcion:</label>
+                <textarea formControlName="description" class="form-control" rows="8"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              <div class="form-group">
+                <label for="inCharge">A cargo:</label>
+                <input type="text" formControlName="inCharge" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="expectedDate">Fecha de Entrega:</label>
+                <input type="date" formControlName="expectedDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="status">Estado de Entrega:</label>
+                <mat-select formControlName="status" class="form-control">
+                  <mat-option *ngFor="let status of statusList" [value]="status">
+                    {{ status }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="shortDesc">Descripcion corta de Proyecto:</label>
-            <textarea formControlName="shortDesc" class="form-control" rows="3"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="longDesc">Descripcion larga de Proyecto:</label>
-            <textarea formControlName="longDesc" class="form-control" rows="8"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="inCharge">A cargo:</label>
-            <input type="text" formControlName="inCharge" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="expectedDate">Fecha de Entrega:</label>
-            <input type="date" formControlName="expectedDate" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="deliveryStatus">Estado de Entrega:</label>
-            <mat-select formControlName="deliveryStatus" class="form-control">
-              <mat-option *ngFor="let status of statusList" [value]="status">
-                {{ status }}
-              </mat-option>
-            </mat-select>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions class="d-flex justify-content-center">
-  <button class="thinka-btn-delete m-2" mat-dialog-close>Cancelar</button>
-  <button class="thinka-btn-do m-2" (click)="createOrUpdate()" mat-dialog-close cdkFocusInitial>Guardar</button>
-</mat-dialog-actions>
+      </form>
+    </mat-dialog-content>
+  </div>
+  <div class="row modal-footer">
+
+    <mat-dialog-actions class="d-flex justify-content-center">
+      <button class="thinka-btn-delete m-2" mat-dialog-close>Cancelar</button>
+      <button class="thinka-btn-do m-2" (click)="createOrUpdate()" mat-dialog-close cdkFocusInitial>Guardar</button>
+    </mat-dialog-actions>
+  </div>
+</div>

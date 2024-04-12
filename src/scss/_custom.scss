@@ -1,8 +1,15 @@
 // Here you can add other styles
+h1 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 36px !important;
+  color: rgb(41, 31, 133) !important;
+}
+
 .thinka-table {
-  background-color: white !important;
+  // background-color: white !important;
   th {
-    background-color: rgb(41, 31, 133) !important;
+    background-color: rgb(31, 133, 94) !important;
     color: white !important;
     border: 1px solid white;
   }
@@ -48,13 +55,13 @@
   }
 }
 .thinka-btn-edit {
-  background-color: rgb(196, 192, 7);
+  background-color: rgb(255, 187, 0);
   padding: 10px 25px 10px 25px;
   color: white;
   border-radius: 8px;
   border: none;
   &:hover{
-    background-color: rgb(167, 164, 7);
+    background-color: rgb(255, 162, 0);
     color: rgb(233, 233, 233);
     transition: 0.3s;
   }
@@ -82,4 +89,23 @@
     color: rgb(233, 233, 233);
     transition: 0.3s;
   }
+}
+
+.modal-header {
+  background-color: rgb(41, 31, 133) !important;
+
+  h2 {
+    color: white !important;
+  }
+}
+
+.modal-body {
+  background-color: white;
+  padding: 10px 10px 10px 10px !important;
+}
+
+.modal-footer {
+  border-top: 1px solid rgb(41, 31, 133) !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
 }

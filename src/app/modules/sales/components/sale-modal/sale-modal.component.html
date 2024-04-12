@@ -1,1 +1,131 @@
-<p>sale-modal works!</p>
+<div class="container-fluid">
+  <div class="row modal-header">
+    <h2 mat-dialog-title>{{this.action}} Venta </h2>
+  </div>
+  <div class="row modal-body">
+    <mat-dialog-content>
+      <form [formGroup]="saleForm">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="title">Titulo:</label>
+                <input type="text" formControlName="title" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="form-group">
+                <label for="clientName">Cliente:</label>
+                <input type="text" formControlName="clientName" class="form-control">
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="startDate">Inicio de proyecto:</label>
+                <input type="date" formControlName="startDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="endDate">Fin de proyecto:</label>
+                <input type="date" formControlName="endDate" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="domain">Dominio:</label>
+                <input type="text" formControlName="domain" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="cost">Costo:</label>
+                <input type="text" formControlName="cost" class="form-control">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="duration">Duracion:</label>
+                <input type="text" formControlName="duration" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="briefUrl">Brief:</label>
+                <textarea type="text" formControlName="briefUrl" class="form-control" rows="1"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="resume">Resumen: </label>
+                <textarea formControlName="resume" class="form-control" rows="1"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="description">Descripcion:</label>
+                <textarea formControlName="description" class="form-control" rows="4"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="paymentType">Tipo de pago:</label>
+                <input type="text" formControlName="paymentType" class="form-control">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="total">Total:</label>
+                <input type="text" formControlName="total" class="form-control">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="paymentStatus">Estado de pago:</label>
+                <input type="text" formControlName="paymentStatus" class="form-control">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
+              <div class="form-group">
+                <label for="inCharge">A Cargo:</label>
+                <input type="text" formControlName="inCharge" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="paymentStatus">Estado:</label>
+                <mat-select formControlName="paymentStatus" class="form-control">
+                  <mat-option *ngFor="let type of statusTypes" [value]="type">
+                    {{ type }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-dialog-content>
+  </div>
+  <div class="row modal-footer">
+    <mat-dialog-actions class="d-flex justify-content-center">
+      <button class="thinka-btn-delete" mat-dialog-close>Cancelar</button>
+      <button class="thinka-btn-do" (click)="createOrUpdate()" mat-dialog-close cdkFocusInitial>Guardar</button>
+    </mat-dialog-actions>
+  </div>
+</div>

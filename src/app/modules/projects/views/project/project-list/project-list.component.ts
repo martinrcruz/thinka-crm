@@ -5,23 +5,26 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, of } from 'rxjs';
 import Swal from 'sweetalert2';
-import { TaskModalComponent } from '../../components/task-modal/task-modal.component';
-import { Task } from '../../models/Task';
-import { TaskService } from '../../services/tasks.service';
+
+import { Project, ProjectData } from '../../../models/Project';
+import { ProjectModalComponent } from '../../../components/project-modal/project-modal.component';
+import { ProjectService } from '../../../services/project.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tasks',
-  templateUrl: './tasks.component.html',
-  styleUrls: ['./tasks.component.scss']
+  selector: 'app-project-list',
+  templateUrl: './project-list.component.html',
+  styleUrls: ['./project-list.component.scss']
 })
-export class TasksComponent {
+export class ProjectListComponent {
+
   dataSource: any;
   displayedColumns: string[] = ['id', 'title', 'shortDesc', 'deliveryStatus', 'inCharge', 'expectedDate', 'edit', 'delete'];
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
 
-  tasks: Task[] = [];
+  projects: Project[] = [];
   pageNumber: number = 1;
   pageSize: number = 10;
   totalItems: number = 0;
@@ -31,31 +34,36 @@ export class TasksComponent {
 
   constructor(
     private _dialog: MatDialog,
-    private _task: TaskService
+    private _project: ProjectService,
+    private _router: Router
   ) {
   }
 
-  ngOnInit(){
-    this.listTasks();
+  ngOnInit() {
+    this.listProjects();
   }
 
-  listTasks() {
+  listProjects() {
     this.loading = true;
-    this._task
-      .listTasks()
+    this._project
+      .listProjects()
       .pipe(catchError((error) => of({ dto: [], codError: error, codErrorDesc: error.descError })))
-      .subscribe((response: Task[]) => {
-        this.dataSource = new MatTableDataSource(response);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+      .subscribe((response: Project[]) => {
+        this.projects = response;
       })
       .add(() => {
         this.loading = false;
       });
   }
 
-  openDialog(id: number | null) {
-    const dialogRef = this._dialog.open(TaskModalComponent, {
+  goToProjectDetail(id: number | string) {
+    this._router.navigate(['/projects/project-detail'], {
+      queryParams: { id: id },
+    });
+  }
+
+  openDialog(id: number | string | null) {
+    const dialogRef = this._dialog.open(ProjectModalComponent, {
       width: '1200px',
       height: '700px',
       data: {
@@ -63,7 +71,7 @@ export class TasksComponent {
       }
     });
     dialogRef.afterClosed().subscribe(() => {
-      this.listTasks();
+      this.listProjects();
     });
   }
 
@@ -78,7 +86,7 @@ export class TasksComponent {
       if (result.isDenied) {
         Swal.fire("La operación ha sido cancelada", "", "info");
       } else if (result.isConfirmed) {
-        this._task.deleteTask(id)
+        this._project.deleteProject(id)
           .pipe(
             catchError((error) => {
               Swal.fire('Error al eliminar registro', error.message, 'error');
@@ -88,7 +96,7 @@ export class TasksComponent {
           .subscribe((response: string | null) => {
             if (response) {
               Swal.fire("Registro eliminado con exito", "", "success");
-              this.listTasks();
+              this.listProjects();
             }
           })
       }

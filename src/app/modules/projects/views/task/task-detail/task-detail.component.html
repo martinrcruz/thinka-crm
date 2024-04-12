@@ -1,0 +1,67 @@
+@if(loading){
+  <div class="spinner-border">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+}
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1>Detalles de Tarea</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid thinka-box">
+  <div class="row">
+    <div class="col-10">
+      <h2>{{task.title}}</h2>
+    </div>
+    <div class="col-2">
+      <p><strong>Entrega: </strong> {{task.endDate}} </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <p><strong>Resumen: </strong> {{task.resume}}</p>
+      <p><strong>Objetivos: </strong> {{task.objectives}} </p>
+      <p><strong>Descripción: </strong> {{task.description}}</p>
+        <p><strong>Proyecto: </strong> <button class="btn btn-primary">{{task.projectId}}</button>  </p>
+      <p><strong>A Cargo: </strong> {{task.inCharge}}</p>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col thinka-box">
+      <h2>Progreso: </h2>
+      <div class="progress" role="progressbar">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" style="width: 45%"></div>
+      </div>
+    </div>
+    <div class="col-2 thinka-box">
+      <h2>Dias restantes: </h2>
+      <h2><strong>60 Dias</strong></h2>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid thinka-box">
+  <div class="row">
+    <div class="col">
+      <h2>Explorador de archivos: </h2>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid thinka-box">
+  <div class="row">
+    <div class="col">
+      <h2>Comentarios: </h2>
+      <p>{{task.comments}}</p>
+    </div>
+  </div>
+</div>
+

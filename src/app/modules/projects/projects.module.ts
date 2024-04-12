@@ -16,9 +16,9 @@ import {
   TooltipModule,
   UtilitiesModule
 } from '@coreui/angular';
-import { TasksComponent } from './views/tasks/tasks.component';
+import { TaskListComponent } from './views/task/task-list/task-list.component';
 import { ProjectsRoutingModule } from './projects-routing.module';
-import { ProjectComponent } from './views/project/project.component';
+import { ProjectListComponent } from './views/project/project-list/project-list.component';
 import { ProjectModalComponent } from './components/project-modal/project-modal.component';
 
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -31,16 +31,21 @@ import {MatNativeDateModule, NativeDateAdapter} from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ProjectDetailComponent } from './views/project-detail/project-detail.component';
+import { ProjectDetailComponent } from './views/project/project-detail/project-detail.component';
+import {MatCardModule} from '@angular/material/card';
+import {KanbanModule} from '@syncfusion/ej2-angular-kanban';
+import { TaskKanbanComponent } from './views/task/task-kanban/task-kanban.component';
 import { TaskModalComponent } from './components/task-modal/task-modal.component';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import {FileManagerModule} from '@syncfusion/ej2-angular-filemanager';
 @NgModule({
   declarations: [
-    TasksComponent,
-    ProjectComponent,
+    ProjectListComponent,
     ProjectModalComponent,
     ProjectDetailComponent,
-    TaskModalComponent
+    TaskModalComponent,
+    TaskListComponent,
+    TaskKanbanComponent
   ],
   imports: [
     CommonModule,
@@ -68,7 +73,11 @@ import { TaskModalComponent } from './components/task-modal/task-modal.component
     MatSelectModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule,
+    KanbanModule,
+    MatTabsModule,
+    FileManagerModule
   ],
 })
 export class ProjectsModule {

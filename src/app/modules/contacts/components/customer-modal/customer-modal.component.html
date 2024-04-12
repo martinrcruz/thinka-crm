@@ -1,107 +1,132 @@
-<h2 mat-dialog-title>{{this.action}} Cliente</h2>
-<mat-dialog-content>
-  <form [formGroup]="clientForm">
-    <div class="container">
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="firstName">Nombres:</label>
-            <input type="text" formControlName="firstName" class="form-control">
+<div class="container-fluid">
+  <div class="row modal-header">
+    <h2 mat-dialog-title>{{this.action}} Cliente </h2>
+  </div>
+
+  <div class="row modal-body">
+    <mat-dialog-content>
+      <form [formGroup]="clientForm">
+        <div class="container">
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="firstName">Nombre:</label>
+                <input type="text" formControlName="firstName" class="form-control">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="lastName">Apellido:</label>
+                <input type="text" formControlName="lastName" class="form-control">
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="lastName">Apellidos:</label>
-            <input type="text" formControlName="lastName" class="form-control">
+          <div class="row">
+            <div class="col-3">
+              <div class="form-group">
+                <label for="rut">RUT:</label>
+                <input type="text" formControlName="rut" class="form-control">
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="form-group">
+                <label for="email">Correo electronico:</label>
+                <input type="email" formControlName="email" class="form-control">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="contactNumber">Nro Contacto:</label>
+                <input type="text" formControlName="contactNumber" class="form-control">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="rut">RUT:</label>
-            <input type="text" formControlName="rut" class="form-control">
+
+          <div class="row">
+            <div class="col-5">
+              <div class="form-group">
+                <label for="workline">Rubro:</label>
+                <input type="text" formControlName="workline" class="form-control">
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="form-group">
+                <label for="domain">Dominio:</label>
+                <input type="text" formControlName="domain" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="contactPlatform">Plataforma de Contacto:</label>
+                <input type="text" formControlName="contactPlatform" class="form-control">
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="col-8">
-          <div class="form-group">
-            <label for="email">Correo electronico:</label>
-            <input type="email" formControlName="email" class="form-control">
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="address">Dirección:</label>
+                <input type="text" formControlName="address" class="form-control">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="city">Ciudad:</label>
+                <input type="text" formControlName="city" class="form-control">
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="city">Dirección:</label>
-            <input type="text" formControlName="city" class="form-control">
+
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="description">Descripcion de Proyecto:</label>
+                <textarea formControlName="description" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-6">
-          <div class="form-group">
-            <label for="contactPlatform">Plataforma de Contacto:</label>
-            <input type="text" formControlName="contactPlatform" class="form-control">
+
+          <div class="row">
+            <div class="col-8">
+              <div class="form-group">
+                <label for="inCharge">A Cargo:</label>
+                <input type="text" formControlName="inCharge" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="type">Estado:</label>
+                <mat-select formControlName="type" class="form-control">
+                  <mat-option *ngFor="let type of statusTypes" [value]="type.id">
+                    {{ type.name }}
+                  </mat-option>
+                </mat-select>
+              </div>
+            </div>
           </div>
+
+          @if(this.data.id != null){
+            <div class="row thinka-box mt-3">
+              <div class="col-6">
+                  <p><strong>Fecha de creacion:</strong> {{customer.createdAt}}</p>
+                  <p><strong>Realizado por:</strong>  {{customer.createdBy}}</p>
+              </div>
+              <div class="col-6">
+                <p><strong>Ultima modificación:</strong> {{customer.lastModifiedAt}}</p>
+                <p><strong>Realizado por:</strong> {{customer.lastModifiedBy}}</p>
+              </div>
+            </div>
+          }
         </div>
-        <div class="col-6">
-          <div class="form-group">
-            <label for="budget">Presupuesto:</label>
-            <input type="number" formControlName="budget" class="form-control">
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label for="projectDescription">Descripcion de Proyecto:</label>
-            <textarea formControlName="projectDescription" class="form-control" rows="3"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-8">
-          <div class="form-group">
-            <label for="expectedDate">Fecha Esperada:</label>
-            <input type="date" formControlName="expectedDate" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="deliveryStatus">Estado de Entrega:</label>
-            <mat-select formControlName="deliveryStatus" class="form-control">
-              <mat-option *ngFor="let status of statusList" [value]="status">
-                {{ status }}
-              </mat-option>
-            </mat-select>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="workLine">Giro:</label>
-            <input type="text" formControlName="workLine" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="inCharge">A cargo:</label>
-            <input type="text" formControlName="inCharge" class="form-control">
-          </div>
-        </div>
-        <div class="col-4">
-          <div class="form-group">
-            <label for="status">Estado:</label>
-            <input type="text" formControlName="status" class="form-control">
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-</mat-dialog-content>
-<mat-dialog-actions class="d-flex justify-content-center">
-  <button class="thinka-btn-delete m-2" mat-dialog-close>Cancelar</button>
-  <button class="thinka-btn-do m-2" (click)="createOrUpdate()" mat-dialog-close cdkFocusInitial>Guardar</button>
-</mat-dialog-actions>
+      </form>
+    </mat-dialog-content>
+  </div>
+
+  <div class="row modal-footer">
+    <mat-dialog-actions class="d-flex justify-content-center">
+      <button class="thinka-btn-delete" mat-dialog-close>Cancelar</button>
+      <button class="thinka-btn-do" (click)="createOrUpdate()" mat-dialog-close cdkFocusInitial>Guardar</button>
+    </mat-dialog-actions>
+  </div>
+</div>

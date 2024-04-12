@@ -16,14 +16,14 @@ const routes: Routes = [
         redirectTo: 'sales'
       },
       {
-        path: 'quote',
+        path: 'quote-list',
         component: QuoteComponent,
         data: {
           title: 'Quotes',
         },
       },
       {
-        path: 'sale',
+        path: 'sale-list',
         component: SaleComponent,
         data: {
           title: 'Sales',

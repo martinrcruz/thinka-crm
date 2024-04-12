@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LeadsComponent } from './views/leads/leads.component';
 import { CustomerComponent } from './views/customer/customer.component';
 
 const routes: Routes = [
@@ -13,17 +12,10 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'customer'
+        redirectTo: 'customer-list'
       },
       {
-        path: 'leads',
-        component: LeadsComponent,
-        data: {
-          title: 'Leads',
-        },
-      },
-      {
-        path: 'customer',
+        path: 'customer-list',
         component: CustomerComponent,
         data: {
           title: 'Customers',

@@ -10,3 +10,7 @@
 
 // temp fix .chartjs-tooltip-body-item padding
 @import "charts";
+
+.cdk-overlay-container {
+  z-index: 99999999999999 !important;
+}

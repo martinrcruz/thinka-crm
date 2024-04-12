@@ -92,7 +92,8 @@ import {
   cilBolt,
   cilBriefcase,
   cilCart,
-  cilGroup
+  cilGroup,
+  cilClipboard
 } from '@coreui/icons';
 
 export const iconSubset = {
@@ -189,7 +190,8 @@ export const iconSubset = {
   cilBolt,
   cilBriefcase,
   cilCart,
-  cilGroup
+  cilGroup,
+  cilClipboard
 };
 
 export enum IconSubset {
@@ -286,5 +288,6 @@ export enum IconSubset {
   cilBolt = 'cilBolt',
   cilBriefcase = 'cilBriefcase',
   cilCart = 'cilCart',
-  cilGroup = 'cilGroup'
+  cilGroup = 'cilGroup',
+  cilClipboard = 'cilClipboard'
 }

@@ -37,7 +37,7 @@ export class TaskService {
     );
   }
 
-  getTaskById(id: number): Observable<TaskData> {
+  getTaskById(id: number): Observable<Task> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${TaskRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -49,7 +49,7 @@ export class TaskService {
     );
   }
 
-  createTask(task: Task) {
+  createTask(task: TaskData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${TaskRoutes.SAVE}`, task).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -61,7 +61,7 @@ export class TaskService {
     );
   }
 
-  updateTask(task: Task) {
+  updateTask(task: TaskData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${TaskRoutes.UPDATE}`, task).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {

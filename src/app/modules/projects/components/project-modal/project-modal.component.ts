@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Project } from '../../models/Project';
+import { Project, ProjectData } from '../../models/Project';
 import { ProjectService } from '../../services/project.service';
 
 @Component({
@@ -15,25 +15,47 @@ export class ProjectModalComponent {
   action: string = "";
 
   projectForm = this._form.group({
+    id: [''],
     title: [''],
-    longDescription: [''],
-    shortDescription: [''],
-    deliveryStatus: [''],
+    description: [''],
     inCharge: [''],
-    expectedDate: [''],
-    projectDescription: [''],
+    startDate: [''],
+    endDate: [''],
     status: [''],
+    image: [''],
+    createdAt: [''],
+    createdBy: [''],
+    lastModifiedAt: [''],
+    lastModifiedBy: [''],
+    resume: [''],
+    objectives: [''],
+    domain: [''],
+    priority: [''],
+    tags: [''],
+    tasks: [''],
+    files: ['']
   });
 
   project: Project = {
-    id: '',
+    id: 0,
     title: '',
-    shortDescription: '',
-    longDescription: '',
-    deliveryStatus: '',
+    description: '',
     inCharge: '',
-    expectedDate: '',
-    status: ''
+    startDate: '',
+    endDate: '',
+    status: '',
+    image: '',
+    createdAt: '',
+    createdBy: '',
+    lastModifiedAt: '',
+    lastModifiedBy: '',
+    resume: '',
+    objectives: '',
+    domain: '',
+    priority: '',
+    tags: '',
+    tasks: [],
+    files: []
   }
 
   constructor(
@@ -56,29 +78,46 @@ export class ProjectModalComponent {
     this._project.getProjectById(this.data.id)
       .subscribe((response: Project) => {
         this.project = response;
+        console.log(response)
         this.projectForm.setValue({
+          id: this.data.id,
           title: this.project.title,
-          longDescription: this.project.longDescription,
-          shortDescription: this.project.shortDescription,
-          deliveryStatus: this.project.deliveryStatus,
           inCharge: this.project.inCharge,
-          expectedDate: this.project.expectedDate,
-          projectDescription: this.project.longDescription,
-          status: this.project.status
+          startDate: this.project.startDate,
+          endDate: this.project.endDate,
+          description: this.project.description,
+          status: this.project.status,
+          image: this.project.image,
+          createdAt: this.project.createdAt,
+          createdBy: this.project.createdBy,
+          lastModifiedAt: this.project.lastModifiedAt,
+          lastModifiedBy: this.project.lastModifiedBy,
+          resume: this.project.resume,
+          objectives: this.project.objectives,
+          domain: this.project.domain,
+          priority: this.project.priority,
+          tags: this.project.tags,
+          tasks: "",
+          files: ""
         })
       })
   }
 
   createOrUpdate() {
-    const request: Project = {
+    const request: ProjectData = {
       id: this.data.id,
-      title: this.project.title,
-      shortDescription: this.project.shortDescription,
-      deliveryStatus: this.project.deliveryStatus,
-      inCharge: this.project.inCharge,
-      expectedDate: this.project.expectedDate,
-      longDescription: this.project.longDescription,
-      status: this.project.status
+      title: this.projectForm.value.title!,
+      inCharge: this.projectForm.value.inCharge!,
+      description: this.projectForm.value.description!,
+      status: this.projectForm.value.status!,
+      image: this.projectForm.value.image!,
+      resume: this.projectForm.value.resume!,
+      objectives: this.projectForm.value.objectives!,
+      domain: this.projectForm.value.domain!,
+      priority: this.projectForm.value.priority!,
+      tags: this.projectForm.value.tags!,
+      tasks: [],
+      files: []
     };
 
     if (this.data.id != null) {

@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, of } from 'rxjs';
-import { Quote } from 'src/app/modules/sales/models/Quote';
+import { Quote, QuoteData } from 'src/app/modules/sales/models/Quote';
 import { QuoteService } from 'src/app/modules/sales/services/quote.service';
 import Swal from 'sweetalert2';
 import { QuoteModalComponent } from '../../components/quote-modal/quote-modal.component';
@@ -12,11 +12,25 @@ import { QuoteModalComponent } from '../../components/quote-modal/quote-modal.co
 @Component({
   selector: 'app-quote',
   templateUrl: './quote.component.html',
-  styleUrls: ['./quote.component.scss']
+  styleUrls: ['./quote.component.scss'],
 })
 export class QuoteComponent {
   dataSource: any;
-  displayedColumns: string[] = ['id','clientId', 'title', 'shortDesc', 'longDesc', 'objectives', 'notes', 'startDate', 'endDate', 'domain', 'briefUrl', 'details', 'estimatedCost', 'estimatedTime', 'createdAt', 'createdBy', 'lastModifiedAt', 'lastModifiedBy','edit', 'delete'];
+  displayedColumns: string[] = [
+    'id',
+    'title',
+    'resume',
+    'startDate',
+    'endDate',
+    'quoteStatus',
+    'domain',
+    'estimatedCost',
+    'estimatedTime',
+    'createdBy',
+    'createdAt',
+    'edit',
+    'delete',
+  ];
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;
@@ -32,10 +46,9 @@ export class QuoteComponent {
   constructor(
     private _dialog: MatDialog,
     private _quote: QuoteService
-  ) {
-  }
+  ) { }
 
-  ngOnInit(){
+  ngOnInit() {
     this.listQuotes();
   }
 
@@ -43,7 +56,11 @@ export class QuoteComponent {
     this.loading = true;
     this._quote
       .listQuotes()
-      .pipe(catchError((error) => of({ dto: [], codError: error, codErrorDesc: error.descError })))
+      .pipe(
+        catchError((error) =>
+          of({ dto: [], codError: error, codErrorDesc: error.descError })
+        )
+      )
       .subscribe((response: Quote[]) => {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.paginator = this.paginator;
@@ -59,8 +76,8 @@ export class QuoteComponent {
       width: '1200px',
       height: '700px',
       data: {
-        id: id
-      }
+        id: id,
+      },
     });
     dialogRef.afterClosed().subscribe(() => {
       this.listQuotes();
@@ -69,28 +86,29 @@ export class QuoteComponent {
 
   delete(id: number) {
     Swal.fire({
-      title: "Estas seguro de que quieres eliminar el registro?",
-      icon: "error",
+      title: 'Estas seguro de que quieres eliminar el registro?',
+      icon: 'error',
       showDenyButton: true,
-      confirmButtonText: "Eliminar",
-      denyButtonText: "Cancelar"
+      confirmButtonText: 'Eliminar',
+      denyButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isDenied) {
-        Swal.fire("La operación ha sido cancelada", "", "info");
+        Swal.fire('La operación ha sido cancelada', '', 'info');
       } else if (result.isConfirmed) {
-        this._quote.deleteQuote(id)
+        this._quote
+          .deleteQuote(id)
           .pipe(
             catchError((error) => {
               Swal.fire('Error al eliminar registro', error.message, 'error');
               return of(null);
-            }),
+            })
           )
           .subscribe((response: string | null) => {
             if (response) {
-              Swal.fire("Registro eliminado con exito", "", "success");
+              Swal.fire('Registro eliminado con exito', '', 'success');
               this.listQuotes();
             }
-          })
+          });
       }
     });
   }
@@ -102,4 +120,6 @@ export class QuoteComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+
+
 }

@@ -4,6 +4,7 @@ import { Observable, map, catchError } from 'rxjs';
 import { DefaultResponse } from 'src/app/shared/models/Http';
 import { ErrorService } from 'src/app/shared/services/error/error.service';
 import { SaleData, Sale } from '../models/Sale';
+import { environment } from 'src/environments/environment';
 
 export enum SaleRoutes {
   LIST = '/v1/sale/list',
@@ -19,7 +20,7 @@ export enum SaleRoutes {
 
 export class SaleService {
 
-  private apiUrl: string = "http://localhost:8082/api";
+  private apiUrl: string = environment.saleMicroserviceUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -37,7 +38,7 @@ export class SaleService {
     );
   }
 
-  getSaleById(id: number): Observable<SaleData> {
+  getSaleById(id: number): Observable<Sale> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${SaleRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -49,7 +50,7 @@ export class SaleService {
     );
   }
 
-  createSale(Sale: Sale) {
+  createSale(Sale: SaleData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${SaleRoutes.SAVE}`, Sale).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {
@@ -61,7 +62,7 @@ export class SaleService {
     );
   }
 
-  updateSale(Sale: Sale) {
+  updateSale(Sale: SaleData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${SaleRoutes.UPDATE}`, Sale).pipe(
       map((response: DefaultResponse) => {
         if (response.resCode === 0) {

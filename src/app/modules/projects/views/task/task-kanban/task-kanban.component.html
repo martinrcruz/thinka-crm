@@ -1,0 +1,23 @@
+<div class="spinner-border" *ngIf="loading">
+  <span class="visually-hidden">Loading...</span>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1>Pizarra KANBAN</h1>
+    </div>
+  </div>
+</div>
+<div class="container-fluid">
+  <div class="row thinka-box">
+    <ejs-kanban keyField='Status' [dataSource]='data' [cardSettings]='cardSettings'>
+      <e-columns>
+        <e-column headerText='Por hacer' keyField='Open'></e-column>
+        <e-column headerText='En Progreso' keyField='InProgress'></e-column>
+        <e-column headerText='Testing' keyField='Testing'></e-column>
+        <e-column headerText='Completado' keyField='Close'></e-column>
+      </e-columns>
+    </ejs-kanban>
+  </div>
+</div>
