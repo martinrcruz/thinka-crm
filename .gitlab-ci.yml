@@ -11,7 +11,7 @@ before_script:
 - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY --username $CI_REGISTRY_USER --password-stdin
 
 variables:
-  DOCKER_IMAGE_NAME: pos-assistant
+  DOCKER_IMAGE_NAME: thinka-crm
   DOCKER_TLS_CERTDIR: ""
   DOCKER_HOST: "tcp://docker:2375"
 

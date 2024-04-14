@@ -27,7 +27,11 @@
             <mat-card-title>{{project.title}}</mat-card-title>
             <mat-card-subtitle>{{project.inCharge}}</mat-card-subtitle>
           </mat-card-header>
-          <img mat-card-image style="height: 250px;" src="{{project.image}}">
+          @if(project.image != null && project.image.url != null) {
+            <img mat-card-image style="height: 250px;" src="{{project.image.url}}">
+          } @else {
+            <img mat-card-image style="height: 250px;" src="assets/img/example/photo1.jpg">
+          }
           <mat-card-content class="p-3">
             <p>
               {{project.description}}

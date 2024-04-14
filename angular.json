@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pos-assistant": {
+    "thinka-crm": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pos-assistant",
+            "outputPath": "dist/thinka-crm",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -89,10 +89,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "pos-assistant:build:production"
+              "buildTarget": "thinka-crm:build:production"
             },
             "development": {
-              "buildTarget": "pos-assistant:build:development"
+              "buildTarget": "thinka-crm:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -100,7 +100,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "pos-assistant:build"
+            "buildTarget": "thinka-crm:build"
           }
         },
         "test": {

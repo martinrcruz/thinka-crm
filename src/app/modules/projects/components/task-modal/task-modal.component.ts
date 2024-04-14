@@ -11,7 +11,7 @@ import { Tag } from 'src/app/shared/models/Tag';
   styleUrls: ['./task-modal.component.scss']
 })
 export class TaskModalComponent {
-  statusList = ['New', 'In Progress', 'Done'];
+  statusList = ['NEW', 'IN_PROGRESS', 'DONE'];
 
 
   action: string = "";
@@ -22,10 +22,10 @@ export class TaskModalComponent {
     resume: [''],
     description: [''],
     objectives: [''],
+    comments: [''],
     taskStatus: [''],
     inCharge: [''],
     priority: [''],
-    comments: [''],
     startDate: [''],
     endDate: [''],
     tags: [''],
@@ -36,26 +36,7 @@ export class TaskModalComponent {
     lastModifiedBy: ['']
   });
 
-  task: Task = {
-    id: 0,
-    title: '',
-    resume: '',
-    description: '',
-    objectives: '',
-    taskStatus: '',
-    inCharge: '',
-    priority: '',
-    comments: '',
-    startDate: '',
-    endDate: '',
-    tags: [],
-    files: [],
-    createdAt: '',
-    createdBy: '',
-    lastModifiedAt: '',
-    lastModifiedBy: ''
-  }
-
+  task: Task = {} as Task;
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<TaskModalComponent>,
@@ -100,22 +81,22 @@ export class TaskModalComponent {
 
   createOrUpdate() {
     const request: Task = {
-      id: this.task.id,
-      title: this.task.title,
-      resume: this.task.resume,
-      description: this.task.description,
-      objectives: this.task.objectives,
-      taskStatus: this.task.taskStatus,
-      inCharge: this.task.inCharge,
-      priority: this.task.priority,
-      comments: this.task.comments,
-      startDate: this.task.startDate,
-      endDate: this.task.endDate,
-      tags: [{} as Tag],
-      createdAt: this.task.createdAt,
-      createdBy: this.task.createdBy,
-      lastModifiedAt: this.task.lastModifiedAt,
-      lastModifiedBy: this.task.lastModifiedBy,
+      id: Number(this.taskForm.value.id!),
+      title: this.taskForm.value.title!,
+      resume: this.taskForm.value.resume!,
+      description: this.taskForm.value.description!,
+      objectives: this.taskForm.value.objectives!,
+      taskStatus: this.taskForm.value.taskStatus!,
+      inCharge: this.taskForm.value.inCharge!,
+      priority: this.taskForm.value.priority!,
+      comments: this.taskForm.value.comments!,
+      startDate: this.taskForm.value.startDate!,
+      endDate: this.taskForm.value.endDate!,
+      tags: [{} as Tag]!,
+      createdAt: this.taskForm.value.createdAt!,
+      createdBy: this.taskForm.value.createdBy!,
+      lastModifiedAt: this.taskForm.value.lastModifiedAt!,
+      lastModifiedBy: this.taskForm.value.lastModifiedBy!,
       files: []
     };
 

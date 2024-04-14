@@ -49,6 +49,7 @@ export class ProjectListComponent {
       .listProjects()
       .pipe(catchError((error) => of({ dto: [], codError: error, codErrorDesc: error.descError })))
       .subscribe((response: Project[]) => {
+        console.log(response);
         this.projects = response;
       })
       .add(() => {
