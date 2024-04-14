@@ -1,8 +1,11 @@
+import { Customer } from "../../contacts/models/Customer";
+import { Project } from "../../projects/models/Project";
+import { Quote } from "./Quote";
+
 export interface Sale {
   id: number;
-  quoteId: number | null;
-  clientId: number;
-  clientName: string;
+  quote: Quote | null;
+  customer: Customer | null;
   title: string;
   resume: string;
   description: string;
@@ -13,12 +16,10 @@ export interface Sale {
   cost: number;
   duration: string;
   inCharge: string;
-  projectId: number;
-  projectStatus: string;
+  project: Project[];
   paymentType: string;
   bruteCost: number;
   iva: number;
-  total: number;
   paymentStatus: string;
   createdAt: string;
   createdBy: string;
@@ -28,9 +29,11 @@ export interface Sale {
 
 export interface SaleData {
   id: number;
-  clientName: string;
+  quote: Quote | null;
+  customer: Customer | null;
   title: string;
   resume: string;
+  description: string;
   startDate: string;
   endDate: string;
   domain: string;
@@ -38,7 +41,10 @@ export interface SaleData {
   cost: number;
   duration: string;
   inCharge: string;
-  total: number;
+  project: Project[];
+  paymentType: string;
+  bruteCost: number;
+  iva: number;
   paymentStatus: string;
   createdAt: string;
   createdBy: string;

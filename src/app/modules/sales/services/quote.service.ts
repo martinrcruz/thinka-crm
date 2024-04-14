@@ -20,7 +20,7 @@ export enum QuoteRoutes {
 
 export class QuoteService {
 
-  private apiUrl: string = environment.saleMicroserviceUrl;
+  private apiUrl: string = environment.apiUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -29,10 +29,10 @@ export class QuoteService {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.LIST}`).pipe(
       map((response: DefaultResponse) => {
         console.log(response)
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -41,10 +41,10 @@ export class QuoteService {
   getQuoteById(id: number): Observable<Quote> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -53,10 +53,10 @@ export class QuoteService {
   createQuote(Quote: QuoteData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.SAVE}`, Quote).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -65,10 +65,10 @@ export class QuoteService {
   updateQuote(Quote: QuoteData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.UPDATE}`, Quote).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -77,10 +77,10 @@ export class QuoteService {
   deleteQuote(id: number) {
     return this._http.delete<DefaultResponse>(`${this.apiUrl}${QuoteRoutes.DELETE}?id=${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );

@@ -22,7 +22,7 @@ export enum CustomerRoutes {
 
 export class CustomerService {
 
-  private apiUrl: string = environment.clientMicroserviceUrl;
+  private apiUrl: string = environment.apiUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -31,10 +31,10 @@ export class CustomerService {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.LIST}`).pipe(
       map((response: DefaultResponse) => {
         console.log(response)
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -43,10 +43,10 @@ export class CustomerService {
   getCustomerById(id: number): Observable<Customer> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -55,10 +55,10 @@ export class CustomerService {
   createCustomer(customer: CustomerData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.SAVE}`, customer).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 0) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -67,10 +67,10 @@ export class CustomerService {
   updateCustomer(customer: CustomerData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.UPDATE}`, customer).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 0) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -79,10 +79,10 @@ export class CustomerService {
   deleteCustomer(id: number) {
     return this._http.delete<DefaultResponse>(`${this.apiUrl}${CustomerRoutes.DELETE}?id=${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 0) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );

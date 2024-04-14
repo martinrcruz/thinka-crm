@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Quote, QuoteData, QuoteStatus } from '../../models/Quote';
 import { QuoteService } from '../../services/quote.service';
+import { Customer } from 'src/app/modules/contacts/models/Customer';
 
 @Component({
   selector: 'app-quote-modal',
@@ -51,12 +52,7 @@ export class QuoteModalComponent {
   action: string = "";
 
   quoteForm = this._form.group({
-    createdAt: [''],
-    createdBy: [''],
-    lastModifiedAt: [''],
-    lastModifiedBy: [''],
-    clientId: [''],
-    clientName: [''],
+    customer: [''],
     title: [''],
     resume: [''],
     description: [''],
@@ -66,7 +62,11 @@ export class QuoteModalComponent {
     estimatedCost: [''],
     estimatedTime: [''],
     inCharge: [''],
-    quoteStatus: ['']
+    quoteStatus: [''],
+    createdAt: [''],
+    createdBy: [''],
+    lastModifiedAt: [''],
+    lastModifiedBy: ['']
   });
 
 
@@ -97,8 +97,7 @@ export class QuoteModalComponent {
           createdBy: this.quote.createdBy!,
           lastModifiedAt: this.quote.lastModifiedAt!,
           lastModifiedBy: this.quote.lastModifiedBy!,
-          clientId: String(this.quote.clientId!),
-          clientName: String(this.quote.clientId!), //TODO
+          customer: String(this.quote.customer!),
           title: this.quote.title!,
           resume: this.quote.resume!,
           description: this.quote.description!,
@@ -116,8 +115,7 @@ export class QuoteModalComponent {
   createOrUpdate() {
     const request: QuoteData = {
       id: this.data.id,
-      clientId: Number(this.quoteForm.value.clientId!),
-      clientName: this.quoteForm.value.clientId!,
+      customer: {} as Customer,
       title: this.quoteForm.value.title!,
       resume: this.quoteForm.value.resume!,
       description: this.quoteForm.value.description!,

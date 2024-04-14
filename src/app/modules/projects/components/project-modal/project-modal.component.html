@@ -17,8 +17,24 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
+                <label for="objectives">Objetivos:</label>
+                <textarea formControlName="objectives" class="form-control" rows="2"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
                 <label for="resume">Resumen:</label>
-                <textarea formControlName="resume" class="form-control" rows="2"></textarea>
+                <textarea formControlName="resume" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="domain">Dominio:</label>
+                <input type="text" formControlName="domain" class="form-control">
               </div>
             </div>
           </div>
@@ -30,23 +46,49 @@
               </div>
             </div>
           </div>
+
           <div class="row">
-            <div class="col-4">
+            <div class="col">
+              <div class="form-group">
+                <label for="tags">Etiquetas:</label>
+                <input type="text" formControlName="tags" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+              <div class="form-group">
+                <label for="priority">Prioridad:</label>
+                <input type="number" formControlName="priority" class="form-control">
+              </div>
+            </div>
+            <div class="col-6">
               <div class="form-group">
                 <label for="inCharge">A cargo:</label>
                 <input type="text" formControlName="inCharge" class="form-control">
               </div>
             </div>
+          </div>
+
+
+          <div class="row">
             <div class="col-4">
               <div class="form-group">
-                <label for="expectedDate">Fecha de Entrega:</label>
-                <input type="date" formControlName="expectedDate" class="form-control">
+                <label for="startDate">Fecha de Inicio:</label>
+                <input type="date" formControlName="startDate" class="form-control">
               </div>
             </div>
             <div class="col-4">
               <div class="form-group">
-                <label for="status">Estado de Entrega:</label>
-                <mat-select formControlName="status" class="form-control">
+                <label for="endDate">Fecha de Entrega:</label>
+                <input type="date" formControlName="endDate" class="form-control">
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="projectStatus">Estado de Entrega:</label>
+                <mat-select formControlName="projectStatus" class="form-control">
                   <mat-option *ngFor="let status of statusList" [value]="status">
                     {{ status }}
                   </mat-option>

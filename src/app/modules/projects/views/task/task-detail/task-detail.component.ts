@@ -13,6 +13,7 @@ export class TaskDetailComponent implements OnInit {
   loading: boolean = false;
 
   taskId: number = 0;
+  projectId: number = 0;
 
   task: TaskDetail = {} as TaskDetail
 

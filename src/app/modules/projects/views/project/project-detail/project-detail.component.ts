@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ProjectDetail } from '../../../models/Project';
+import { Project, ProjectDetail } from '../../../models/Project';
 import { MatTableDataSource } from '@angular/material/table';
 import { catchError, of } from 'rxjs';
 import { Customer } from 'src/app/modules/contacts/models/Customer';
@@ -31,7 +31,7 @@ export class ProjectDetailComponent implements OnInit {
     'delete',
   ];
 
-  project: ProjectDetail = {} as ProjectDetail
+  project: Project = {} as Project
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
   @ViewChild(MatSort) sort?: MatSort;

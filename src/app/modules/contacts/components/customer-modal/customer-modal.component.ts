@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Customer, CustomerData, CustomerStatus } from 'src/app/modules/contacts/models/Customer';
 import { CustomerService } from '../../services/customer.service';
+import { Project } from 'src/app/modules/projects/models/Project';
 
 @Component({
   selector: 'app-customer-modal',
@@ -46,7 +47,6 @@ export class CustomerModalComponent {
     address: [''],
     city: [''],
     domain: [''],
-    type: [''],
     inCharge: [''],
     contactPlatform: [''],
     description: [''],
@@ -56,7 +56,7 @@ export class CustomerModalComponent {
     createdBy: [''],
     lastModifiedAt: [''],
     lastModifiedBy: [''],
-    status: ['']
+    clientStatus: ['']
   });
 
 
@@ -95,9 +95,8 @@ export class CustomerModalComponent {
           city: this.customer.city!,
           description: this.customer.description!,
           inCharge: this.customer.inCharge!,
-          type: String(this.customer.type!),
-          status: this.clientForm.value.status!,
-          projects: this.customer.projects!,
+          clientStatus: this.customer.clientStatus!,
+          projects: this.clientForm.value.projects!,
           createdAt: this.customer.createdAt!,
           createdBy: this.customer.createdBy!,
           lastModifiedAt: this.customer.lastModifiedAt!,
@@ -121,8 +120,8 @@ export class CustomerModalComponent {
       contactPlatform: this.clientForm.value.contactPlatform!,
       description: this.clientForm.value.description!,
       inCharge: this.clientForm.value.inCharge!,
-      type: Number(this.clientForm.value.type!),
-      status: this.clientForm.value.status!
+      clientStatus: this.clientForm.value.clientStatus!,
+      projects: [{} as Project]
     };
 
     if (this.data.id != null) {

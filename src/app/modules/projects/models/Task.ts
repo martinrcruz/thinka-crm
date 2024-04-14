@@ -1,18 +1,20 @@
+import { ThinkaFile } from "src/app/shared/models/ThinkaFile";
+import { Tag } from "src/app/shared/models/Tag";
+
 export interface Task {
   id: number;
-  projectId: number;
   title: string;
   resume: string;
   description: string;
   objectives: string;
+  comments: string;
   taskStatus: string;
   inCharge: string;
   priority: string;
-  comments: string;
   startDate: string;
   endDate: string;
-  tags: string;
-  files: string[];
+  tags: Tag[];
+  files: ThinkaFile[];
   createdAt: string;
   createdBy: string;
   lastModifiedAt: string;
@@ -21,31 +23,34 @@ export interface Task {
 
 export interface TaskData {
   id: number;
-  projectId: number;
-  title: string;
-  resume: string;
-  taskStatus: string;
-  inCharge: string;
-  priority: string;
-  startDate: string;
-  endDate: string;
-}
-
-export interface TaskDetail {
-  id: number;
-  projectId: number;
   title: string;
   resume: string;
   description: string;
   objectives: string;
+  comments: string;
   taskStatus: string;
   inCharge: string;
   priority: string;
-  comments: string;
   startDate: string;
   endDate: string;
-  tags: string;
-  files: string[];
+  tags: Tag[];
+  files: ThinkaFile[];
+}
+
+export interface TaskDetail {
+  id: number;
+  title: string;
+  resume: string;
+  description: string;
+  objectives: string;
+  comments: string;
+  taskStatus: string;
+  inCharge: string;
+  priority: string;
+  startDate: string;
+  endDate: string;
+  tags: Tag[];
+  files: ThinkaFile[];
   createdAt: string;
   createdBy: string;
   lastModifiedAt: string;

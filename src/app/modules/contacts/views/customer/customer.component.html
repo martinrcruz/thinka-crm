@@ -121,13 +121,13 @@
     <ng-container matColumnDef="customerStatus">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
       <td mat-cell *matCellDef="let row">
-         @if (row.customerStatus == 2) {
+         @if (row.clientStatus == 'NEW') {
           <span class="btn btn-primary w-100">Nuevo</span>
          }
-         @else if(row.customerStatus == 3) {
+         @else if(row.clientStatus == 'LEAD') {
           <span class="btn btn-danger w-100">Lead</span>
          }
-         @else if(row.customerStatus == 4){
+         @else if(row.clientStatus == 'CUSTOMER'){
           <span class="btn btn-success w-100">Cliente</span>
          }
          @else {

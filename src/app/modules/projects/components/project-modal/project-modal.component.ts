@@ -21,7 +21,7 @@ export class ProjectModalComponent {
     inCharge: [''],
     startDate: [''],
     endDate: [''],
-    status: [''],
+    projectStatus: [''],
     image: [''],
     createdAt: [''],
     createdBy: [''],
@@ -32,31 +32,10 @@ export class ProjectModalComponent {
     domain: [''],
     priority: [''],
     tags: [''],
-    tasks: [''],
     files: ['']
   });
 
-  project: Project = {
-    id: 0,
-    title: '',
-    description: '',
-    inCharge: '',
-    startDate: '',
-    endDate: '',
-    status: '',
-    image: '',
-    createdAt: '',
-    createdBy: '',
-    lastModifiedAt: '',
-    lastModifiedBy: '',
-    resume: '',
-    objectives: '',
-    domain: '',
-    priority: '',
-    tags: '',
-    tasks: [],
-    files: []
-  }
+  project: Project = {} as Project
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -86,8 +65,8 @@ export class ProjectModalComponent {
           startDate: this.project.startDate,
           endDate: this.project.endDate,
           description: this.project.description,
-          status: this.project.status,
-          image: this.project.image,
+          projectStatus: this.project.projectStatus,
+          image: String(this.project.image),
           createdAt: this.project.createdAt,
           createdBy: this.project.createdBy,
           lastModifiedAt: this.project.lastModifiedAt,
@@ -96,8 +75,7 @@ export class ProjectModalComponent {
           objectives: this.project.objectives,
           domain: this.project.domain,
           priority: this.project.priority,
-          tags: this.project.tags,
-          tasks: "",
+          tags:"",
           files: ""
         })
       })
@@ -109,15 +87,19 @@ export class ProjectModalComponent {
       title: this.projectForm.value.title!,
       inCharge: this.projectForm.value.inCharge!,
       description: this.projectForm.value.description!,
-      status: this.projectForm.value.status!,
-      image: this.projectForm.value.image!,
+      projectStatus: this.projectForm.value.projectStatus!,
+      image: {
+        name: this.projectForm.value.image!,
+        url: this.projectForm.value.image!
+      },
       resume: this.projectForm.value.resume!,
       objectives: this.projectForm.value.objectives!,
       domain: this.projectForm.value.domain!,
       priority: this.projectForm.value.priority!,
-      tags: this.projectForm.value.tags!,
-      tasks: [],
-      files: []
+      tags: [],
+      files: [],
+      startDate: this.projectForm.value.startDate!,
+      endDate:  this.projectForm.value.endDate!
     };
 
     if (this.data.id != null) {

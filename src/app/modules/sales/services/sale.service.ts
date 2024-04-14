@@ -20,7 +20,7 @@ export enum SaleRoutes {
 
 export class SaleService {
 
-  private apiUrl: string = environment.saleMicroserviceUrl;
+  private apiUrl: string = environment.apiUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -29,10 +29,10 @@ export class SaleService {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${SaleRoutes.LIST}`).pipe(
       map((response: DefaultResponse) => {
         console.log(response)
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -41,10 +41,10 @@ export class SaleService {
   getSaleById(id: number): Observable<Sale> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${SaleRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -53,10 +53,10 @@ export class SaleService {
   createSale(Sale: SaleData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${SaleRoutes.SAVE}`, Sale).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -65,10 +65,10 @@ export class SaleService {
   updateSale(Sale: SaleData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${SaleRoutes.UPDATE}`, Sale).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -77,10 +77,10 @@ export class SaleService {
   deleteSale(id: number) {
     return this._http.delete<DefaultResponse>(`${this.apiUrl}${SaleRoutes.DELETE}?id=${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );

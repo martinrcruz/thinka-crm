@@ -1,7 +1,7 @@
 export interface DefaultResponse {
-  resCode: number;
-  resCodeDesc: string;
-  dto: any;
+  code: number;
+  message: string;
+  data: any;
 }
 
 // export interface Pagination<T> {

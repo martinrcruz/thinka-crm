@@ -4,6 +4,7 @@ import { Observable, map, catchError } from 'rxjs';
 import { DefaultResponse } from 'src/app/shared/models/Http';
 import { ErrorService } from 'src/app/shared/services/error/error.service';
 import { ProjectData, Project } from '../models/Project';
+import { environment } from 'src/environments/environment';
 
 export enum ProjectRoutes {
   LIST = '/v1/project/list',
@@ -19,7 +20,7 @@ export enum ProjectRoutes {
 
 export class ProjectService {
 
-  private apiUrl: string = "http://localhost:8083/api";
+  private apiUrl: string = environment.apiUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -28,10 +29,10 @@ export class ProjectService {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.LIST}`).pipe(
       map((response: DefaultResponse) => {
         console.log(response)
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -40,10 +41,10 @@ export class ProjectService {
   getProjectById(id: number): Observable<Project> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -52,10 +53,10 @@ export class ProjectService {
   createProject(project: ProjectData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.SAVE}`, project).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -64,10 +65,10 @@ export class ProjectService {
   updateProject(project: ProjectData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.UPDATE}`, project).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -76,10 +77,10 @@ export class ProjectService {
   deleteProject(id: number) {
     return this._http.delete<DefaultResponse>(`${this.apiUrl}${ProjectRoutes.DELETE}?id=${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );

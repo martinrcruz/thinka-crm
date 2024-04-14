@@ -4,6 +4,7 @@ import { Observable, map, catchError } from 'rxjs';
 import { DefaultResponse } from 'src/app/shared/models/Http';
 import { ErrorService } from 'src/app/shared/services/error/error.service';
 import { TaskData, Task } from '../models/Task';
+import { environment } from 'src/environments/environment';
 
 export enum TaskRoutes {
   LIST = '/v1/task/list',
@@ -19,7 +20,7 @@ export enum TaskRoutes {
 
 export class TaskService {
 
-  private apiUrl: string = "http://localhost:8083/api";
+  private apiUrl: string = environment.apiUrl;
 
   constructor(private _http: HttpClient) {
   }
@@ -28,10 +29,10 @@ export class TaskService {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${TaskRoutes.LIST}`).pipe(
       map((response: DefaultResponse) => {
         console.log(response)
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -40,10 +41,10 @@ export class TaskService {
   getTaskById(id: number): Observable<Task> {
     return this._http.get<DefaultResponse>(`${this.apiUrl}${TaskRoutes.GET}/${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -52,10 +53,10 @@ export class TaskService {
   createTask(task: TaskData) {
     return this._http.post<DefaultResponse>(`${this.apiUrl}${TaskRoutes.SAVE}`, task).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -64,10 +65,10 @@ export class TaskService {
   updateTask(task: TaskData) {
     return this._http.put<DefaultResponse>(`${this.apiUrl}${TaskRoutes.UPDATE}`, task).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );
@@ -76,10 +77,10 @@ export class TaskService {
   deleteTask(id: number) {
     return this._http.delete<DefaultResponse>(`${this.apiUrl}${TaskRoutes.DELETE}?id=${id}`).pipe(
       map((response: DefaultResponse) => {
-        if (response.resCode === 0) {
-          return response.dto;
+        if (response.code === 200) {
+          return response.data;
         }
-        throw new Error(`${response.resCode}`);
+        throw new Error(`${response.code}`);
       }),
       catchError(ErrorService.handleServiceError),
     );

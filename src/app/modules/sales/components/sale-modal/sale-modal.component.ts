@@ -3,6 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Sale, SaleData } from '../../models/Sale';
 import { SaleService } from '../../services/sale.service';
+import { Customer } from 'src/app/modules/contacts/models/Customer';
+import { Quote } from '../../models/Quote';
+import { Project } from 'src/app/modules/projects/models/Project';
 
 @Component({
   selector: 'app-sale-modal',
@@ -16,60 +19,31 @@ export class SaleModalComponent {
 
   saleForm = this._form.group({
     id: [''],
-    createdAt: [''],
-    createdBy: [''],
-    lastModifiedAt: [''],
-    lastModifiedBy: [''],
-    clientId: [''],
-    clientName: [''],
+    customer: [''],
     title: [''],
     resume: [''],
     description: [''],
     startDate: [''],
     endDate: [''],
     domain: [''],
-    quoteId: [''],
+    quote: [''],
     briefUrl: [''],
     cost: [''],
     duration: [''],
     inCharge: [''],
-    projectId: [''],
-    projectStatus: [''],
+    project: [''],
     paymentType: [''],
     bruteCost: [''],
     iva: [''],
-    total: [''],
-    paymentStatus: ['']
+    paymentStatus: [''],
+    createdAt: [''],
+    createdBy: [''],
+    lastModifiedAt: [''],
+    lastModifiedBy: ['']
   });
 
 
-  sale: Sale = {
-    id: 0,
-    createdAt: '',
-    createdBy: '',
-    lastModifiedAt: '',
-    lastModifiedBy: '',
-    clientId: 0,
-    clientName: '',
-    title: '',
-    resume: '',
-    description: '',
-    startDate: '',
-    endDate: '',
-    domain: '',
-    quoteId: null,
-    briefUrl: '',
-    cost: 0,
-    duration: '',
-    inCharge: '',
-    projectId: 0,
-    projectStatus: '',
-    paymentType: '',
-    bruteCost: 0,
-    iva: 0,
-    total: 0,
-    paymentStatus: ''
-  }
+  sale: Sale = {} as Sale
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -96,8 +70,7 @@ export class SaleModalComponent {
           createdBy: this.sale.createdBy!,
           lastModifiedAt: this.sale.lastModifiedAt!,
           lastModifiedBy: this.sale.lastModifiedBy!,
-          clientId: String(this.sale.clientId!),
-          clientName: String(this.sale.clientId!),
+          customer: String(this.sale.customer!),
           title: this.sale.title!,
           resume: this.sale.resume!,
           description: this.sale.description!,
@@ -106,16 +79,14 @@ export class SaleModalComponent {
           domain: this.sale.domain!,
           inCharge: this.sale.inCharge!,
           id: this.data.id,
-          quoteId: String(this.sale.quoteId!),
+          quote: String(this.sale.quote!),
           briefUrl: this.sale.briefUrl!,
           cost: String(this.sale.cost!),
           duration: this.sale.duration!,
-          projectId: String(this.sale.projectId),
-          projectStatus: String(this.sale.projectId),
+          project: String(this.sale.project),
           paymentType: this.sale.paymentType,
           bruteCost: String(this.sale.bruteCost),
           iva: String(this.sale.iva),
-          total: String(this.sale.total),
           paymentStatus: this.sale.paymentStatus
         })
       })
@@ -124,7 +95,7 @@ export class SaleModalComponent {
   createOrUpdate() {
     const request: SaleData = {
       id: this.data.id,
-      clientName: String(this.sale.clientId!),
+      customer: this.sale.customer!,
       title: this.saleForm.value.title!,
       resume: this.saleForm.value.resume!,
       startDate: this.saleForm.value.startDate!,
@@ -133,11 +104,16 @@ export class SaleModalComponent {
       inCharge: this.saleForm.value.inCharge!,
       briefUrl: this.saleForm.value.briefUrl!,
       cost: Number(this.saleForm.value.cost!),
-      duration:this.saleForm.value.duration!,
-      total:Number(this.saleForm.value.total!),
+      duration: this.saleForm.value.duration!,
       paymentStatus: this.saleForm.value.paymentStatus!,
       createdAt: this.saleForm.value.createdAt!,
       createdBy: this.saleForm.value.createdBy!,
+      quote: {} as Quote,
+      description: this.saleForm.value.description!,
+      project: [{} as Project],
+      paymentType: '',
+      bruteCost: 0,
+      iva: 0
     };
      
     if (this.data.id != null) {
